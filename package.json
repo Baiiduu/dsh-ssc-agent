@@ -1,6 +1,6 @@
 {
   "name": "@aaub-software/dsh-ssc-agent",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Software supply chain security agent preset for DeepSeek Harness.",
   "license": "MIT",
   "repository": {
@@ -29,6 +29,7 @@
     "node": ">=24.0.0"
   },
   "dependencies": {
-    "@aaub-software/dsh-semgrep-sast": "0.1.0"
+    "@aaub-software/dsh-eslint-security-sast": "0.1.0",
+    "@aaub-software/dsh-semgrep-sast": "0.1.1"
   }
 }

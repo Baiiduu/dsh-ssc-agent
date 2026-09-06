@@ -9,7 +9,13 @@ Use either or both analysis paths according to the user's request and the eviden
 
 ## Review rule-engine findings
 
-When a rule-engine scan is appropriate, use the available SAST tool such as `semgrep_scan` on the relevant workspace paths. Treat every reported finding as a candidate, not as a confirmed vulnerability.
+When a rule-engine scan is appropriate, choose the available scanner according to the target and the question:
+
+- Use `semgrep_scan` for general, multi-language pattern coverage and Semgrep rules applicable to the repository.
+- Use `eslint_security_scan` for fast JavaScript or TypeScript security-hotspot checks based on that ecosystem's syntax and AST.
+- For a broader JavaScript or TypeScript assessment, use both when their complementary coverage is useful. Do not run both automatically when a narrow request or one relevant file only needs one scanner.
+
+Scan the relevant workspace paths rather than widening the target without a reason. Treat every reported finding as a candidate, not as a confirmed vulnerability. A clean result from either scanner is not proof that the code is secure.
 
 For each material finding, inspect the reported code and enough surrounding context to determine:
 
@@ -30,6 +36,6 @@ Base every reported issue on identifiable code and a plausible execution or data
 
 ## Combine the results
 
-When using both paths, use the engine results to guide contextual verification, then perform targeted direct analysis of important surfaces and gaps not covered by those findings. Deduplicate issues that describe the same underlying vulnerability and report the strongest repository evidence for each conclusion.
+When using both paths, use the engine results to guide contextual verification, then perform targeted direct analysis of important surfaces and gaps not covered by those findings. If Semgrep and ESLint Security report the same underlying operation, combine them into one issue rather than counting rule matches separately. Preserve the useful rule identifiers and report the strongest repository evidence for each conclusion.
 
 Static analysis is read-only unless the user separately asks for remediation. Do not modify project code merely because an issue was found.

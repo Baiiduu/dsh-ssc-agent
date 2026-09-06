@@ -64,10 +64,13 @@
 
 # ── static application security testing ────────────────────────────────────
 
-# The package is installed by the SSC profile. Mounting it here registers
-# `semgrep_scan` only in this preset's scoped tools layer.
+# The packages are installed with the SSC Agent bundle. Mounting them here
+# registers both scanners only in this preset's scoped tools layer.
 - id: semgrep-sast
   name: '@aaub-software/dsh-semgrep-sast'
+
+- id: eslint-security-sast
+  name: '@aaub-software/dsh-eslint-security-sast'
 
 # ── background jobs ────────────────────────────────────────────────────────
 
