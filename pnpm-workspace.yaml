@@ -1,0 +1,3 @@
+minimumReleaseAgeExclude:
+  - '@aaub-software/dsh-semgrep-sast@0.1.0'
+  - '@aaub-software/semgrep-runtime-win32-x64@0.1.0'
