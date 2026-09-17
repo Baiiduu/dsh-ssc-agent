@@ -1,0 +1,53 @@
+{
+  "name": "@aaub-software/dsh-sast-contract",
+  "version": "0.1.0",
+  "description": "Versioned, scanner-neutral SAST result contract for DeepSeek Harness security plugins.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Baiiduu/dsh-ssc-agent.git",
+    "directory": "packages/sast-contract"
+  },
+  "homepage": "https://github.com/Baiiduu/dsh-ssc-agent/tree/main/packages/sast-contract#readme",
+  "bugs": {
+    "url": "https://github.com/Baiiduu/dsh-ssc-agent/issues"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "sast",
+    "security",
+    "static-analysis",
+    "schema",
+    "typescript"
+  ],
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./schema": "./schemas/ssc-sast-v1.schema.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/**/*.js",
+    "lib/**/*.d.ts",
+    "lib/**/*.map",
+    "schemas/**/*.json"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0"
+  }
+}

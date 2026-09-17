@@ -1,3 +1,6 @@
+packages:
+  - 'packages/*'
+
 minimumReleaseAgeExclude:
   - '@aaub-software/dsh-eslint-security-sast@0.1.0'
   - '@aaub-software/dsh-semgrep-sast@0.1.1'
