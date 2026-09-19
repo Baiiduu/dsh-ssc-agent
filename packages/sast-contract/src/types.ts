@@ -100,3 +100,24 @@ export interface SastScanResult<TEvidence extends SastEvidence = SastEvidence> {
   diagnostics: SastDiagnostic[]
   summary: SastScanSummary
 }
+
+/** Model verdict for one scanner-produced candidate finding. */
+export type SastAssessmentVerdict =
+  | 'confirmed'
+  | 'likely'
+  | 'false-positive'
+  | 'inconclusive'
+
+/**
+ * Minimal model-authored review of one finding.
+ *
+ * This object records a conclusion, not the scanner facts, review workflow,
+ * remediation, or persistence metadata. `findingId` must resolve to exactly
+ * one finding in the associated scan result.
+ */
+export interface SastAssessment {
+  findingId: string
+  verdict: SastAssessmentVerdict
+  /** Concise conclusion and the decisive basis for the verdict. */
+  summary: string
+}

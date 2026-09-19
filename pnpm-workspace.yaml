@@ -5,3 +5,4 @@ minimumReleaseAgeExclude:
   - '@aaub-software/dsh-eslint-security-sast@0.1.0'
   - '@aaub-software/dsh-semgrep-sast@0.1.1'
   - '@aaub-software/semgrep-runtime-win32-x64@0.1.0'
+  - '@aaub-software/dsh-semgrep-sast@0.2.1'

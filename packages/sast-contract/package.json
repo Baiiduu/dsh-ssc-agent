@@ -29,6 +29,7 @@
       "default": "./lib/index.js"
     },
     "./schema": "./schemas/ssc-sast-v1.schema.json",
+    "./assessment-schema": "./schemas/ssc-sast-assessment-v1.schema.json",
     "./package.json": "./package.json"
   },
   "files": [

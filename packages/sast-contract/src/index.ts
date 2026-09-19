@@ -6,6 +6,8 @@ export const SAST_SCHEMA_VERSION: SastSchemaVersion = 'ssc-sast/v1'
 export type {
   JsonPrimitive,
   JsonValue,
+  SastAssessment,
+  SastAssessmentVerdict,
   SastDiagnostic,
   SastEvidence,
   SastFinding,

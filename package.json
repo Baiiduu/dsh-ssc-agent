@@ -1,6 +1,6 @@
 {
   "name": "@aaub-software/dsh-ssc-agent",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Software supply chain security agent preset for DeepSeek Harness.",
   "license": "MIT",
   "repository": {
@@ -10,13 +10,24 @@
   "type": "module",
   "packageManager": "pnpm@11.7.0",
   "exports": {
+    "./runtime": {
+      "types": "./lib/runtime/index.d.ts",
+      "default": "./lib/runtime/index.js"
+    },
     "./cordis.patch.yml": "./cordis.patch.yml",
     "./package.json": "./package.json"
   },
   "files": [
+    "lib/**/*.js",
+    "lib/**/*.d.ts",
+    "lib/**/*.map",
     "cordis.patch.yml",
     "presets/**/*"
   ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -29,7 +40,21 @@
     "node": ">=24.0.0"
   },
   "dependencies": {
-    "@aaub-software/dsh-eslint-security-sast": "0.1.1",
-    "@aaub-software/dsh-semgrep-sast": "0.1.2"
+    "@aaub-software/dsh-sast-contract": "workspace:0.1.0",
+    "@aaub-software/dsh-eslint-security-sast": "0.2.0",
+    "@aaub-software/dsh-semgrep-sast": "0.2.1",
+    "zod": "^4.4.3"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.2",
+    "@deepseek-ai/dsh-storage-domain": "^0.1.5-rc.2",
+    "@deepseek-ai/dsh-tools": "^0.1.5-rc.2"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "^4.0.2",
+    "@deepseek-ai/dsh-storage-domain": "0.1.5-rc.2",
+    "@deepseek-ai/dsh-tools": "0.1.5-rc.2",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
   }
 }

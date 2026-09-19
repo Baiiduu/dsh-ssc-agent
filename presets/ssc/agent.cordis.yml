@@ -73,6 +73,12 @@
 - id: eslint-security-sast
   name: '@aaub-software/dsh-eslint-security-sast'
 
+# Persist normalized scanner results and expose the model-facing assessment
+# submission tool. The Runtime lives in this same npm package, so installing
+# the SSC Agent bundle installs both its preset and executable orchestration.
+- id: ssc-agent-runtime
+  name: '@aaub-software/dsh-ssc-agent/runtime'
+
 # ── background jobs ────────────────────────────────────────────────────────
 
 # Only the model-facing controls. The task REGISTRY stays on the host plane:

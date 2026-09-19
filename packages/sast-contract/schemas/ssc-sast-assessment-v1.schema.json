@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:aaub-software:ssc-sast-assessment:v1",
+  "title": "SSC SAST Assessment v1",
+  "description": "Minimal model-authored review of one scanner-produced SAST finding.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "findingId",
+    "verdict",
+    "summary"
+  ],
+  "properties": {
+    "findingId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Identifier of exactly one finding in the associated SAST scan result."
+    },
+    "verdict": {
+      "enum": [
+        "confirmed",
+        "likely",
+        "false-positive",
+        "inconclusive"
+      ],
+      "description": "The model's adjudication of the candidate finding."
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Concise conclusion and the decisive basis for the verdict."
+    }
+  }
+}

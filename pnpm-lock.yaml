@@ -9,11 +9,33 @@ importers:
   .:
     dependencies:
       '@aaub-software/dsh-eslint-security-sast':
-        specifier: 0.1.1
-        version: 0.1.1(20ee93e7f12d53496062af182193aaf3)
+        specifier: 0.2.0
+        version: 0.2.0(20ee93e7f12d53496062af182193aaf3)
+      '@aaub-software/dsh-sast-contract':
+        specifier: workspace:0.1.0
+        version: link:packages/sast-contract
       '@aaub-software/dsh-semgrep-sast':
-        specifier: 0.1.2
-        version: 0.1.2(20ee93e7f12d53496062af182193aaf3)
+        specifier: 0.2.1
+        version: 0.2.1(20ee93e7f12d53496062af182193aaf3)
+      zod:
+        specifier: ^4.4.3
+        version: 4.6.2
+    devDependencies:
+      '@deepseek-ai/cordis':
+        specifier: ^4.0.2
+        version: 4.0.2
+      '@deepseek-ai/dsh-storage-domain':
+        specifier: 0.1.5-rc.2
+        version: 0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-invariants@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))(@deepseek-ai/dsh-storage@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))
+      '@deepseek-ai/dsh-tools':
+        specifier: 0.1.5-rc.2
+        version: 0.1.5-rc.2(7f9e302786cf21e030eafe960666842c)
+      '@types/node':
+        specifier: ^24.0.0
+        version: 24.13.5
+      typescript:
+        specifier: ^5.9.0
+        version: 5.9.3
 
   packages/sast-contract:
     devDependencies:
@@ -23,8 +45,8 @@ importers:
 
 packages:
 
-  '@aaub-software/dsh-eslint-security-sast@0.1.1':
-    resolution: {integrity: sha512-riJCBjZDVJw3Y4Fx1tnifCjkQ4ANDOqeU9rqnGQypesYgdsrDyZpRSrvCIhJlrHjkNhx4nARjKEEw/zP759e0w==}
+  '@aaub-software/dsh-eslint-security-sast@0.2.0':
+    resolution: {integrity: sha512-qSFsw4WJQ9HDk+vDzJSJLsXdeejBe8ufRD5R9J/28qrUy1TWUtREhAmmWDGCV7ShkBBnAaOy17GHhenwO1Dcwg==}
     engines: {node: '>=24.0.0'}
     peerDependencies:
       '@deepseek-ai/cordis': ^4.0.2
@@ -34,8 +56,12 @@ packages:
       '@deepseek-ai/dsh-tools': ^0.1.5-rc.2
       '@deepseek-ai/dsh-user-approval': ^0.1.5-rc.2
 
-  '@aaub-software/dsh-semgrep-sast@0.1.2':
-    resolution: {integrity: sha512-tRA1dFh+sQTb9Hoizf+o6s6xeDoMDTN2dE0HNNVCxGhQ6+Kn2dna20UwHqmGOkYlydrgEt0kIo0wcI2usv36Xg==}
+  '@aaub-software/dsh-sast-contract@0.1.0':
+    resolution: {integrity: sha512-c6NJJ5k+s21YB6oVabY731osqpu41lxim6g1IurEZ/aWPgJDtOpoX/5PmLkc3ret5el3go7j1S38SQh20tITgQ==}
+    engines: {node: '>=24.0.0'}
+
+  '@aaub-software/dsh-semgrep-sast@0.2.1':
+    resolution: {integrity: sha512-onNWiwqGAFzz7qE5g3T1qj5w2qj9uVS98gMhWzqX+GgrZwmRjfUFtUoHBALc1sbIEuVr4b2V7wfos00x2Dx04A==}
     engines: {node: '>=24.0.0'}
     peerDependencies:
       '@deepseek-ai/cordis': ^4.0.2
@@ -145,6 +171,18 @@ packages:
     peerDependencies:
       '@deepseek-ai/cordis': ^4.0.2
       '@deepseek-ai/dsh-scope': ^0.1.5-rc.2
+
+  '@deepseek-ai/dsh-storage-domain@0.1.5-rc.2':
+    resolution: {integrity: sha512-NZ9U14kqcCnF4F+ynrTlBLb+S9FEOwSLkfdjDgdfrFdHh4c2WsRKWxyeYbL8AME1rB+XxLp4YQBx8LQ0Kiy62A==}
+    peerDependencies:
+      '@deepseek-ai/cordis': ^4.0.2
+      '@deepseek-ai/dsh-invariants': ^0.1.5-rc.2
+      '@deepseek-ai/dsh-storage': ^0.1.5-rc.2
+
+  '@deepseek-ai/dsh-storage@0.1.5-rc.2':
+    resolution: {integrity: sha512-mYt6+JSRxA5fSUcYnI3JFvYw9/TKUyykz5JWoZZ3MxWudItfhw+CV6T3kn3/bpTbWIQnGesSeY+0pJJVz0xBAA==}
+    peerDependencies:
+      '@deepseek-ai/cordis': ^4.0.2
 
   '@deepseek-ai/dsh-subprocess@0.1.5-rc.2':
     resolution: {integrity: sha512-Bbxg5/dlbK09qNu4/BVuicUAYnC+b/YGhtkUBsxa9/+KRfvloeJcJ9Ug6dKAeJeluzEXnFIh08+MNweO7hn7ig==}
@@ -278,6 +316,9 @@ packages:
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+
+  '@types/node@24.13.5':
+    resolution: {integrity: sha512-TXyindR+lBr22aJIdMQzCFHPHR6cR4js838mRDCSz5hOKWZvZwsXSSiXDmjRj4iJmgl+sR9O+1mkoVBSMadNug==}
 
   '@typescript-eslint/parser@8.69.0':
     resolution: {integrity: sha512-l4b0DhWioGg6Gt2ebGlvfkFMOjRsauxtsnDRwUSRX1qHq3HdTfQHV8wW9zEXeciai6HfeaKOedQn2Zoofx3WBw==}
@@ -577,6 +618,9 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  undici-types@7.18.2:
+    resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
+
   undici@8.10.2:
     resolution: {integrity: sha512-/y4/bH9YNU5hi9NIrpOuvGXFcxrj3CMrV+/AYpowAYTpHn8gX/XPFjNy766FPoYY0miQhdW977JFWKGNhBdwyQ==}
     engines: {node: '>=22.19.0'}
@@ -602,8 +646,9 @@ packages:
 
 snapshots:
 
-  '@aaub-software/dsh-eslint-security-sast@0.1.1(20ee93e7f12d53496062af182193aaf3)':
+  '@aaub-software/dsh-eslint-security-sast@0.2.0(20ee93e7f12d53496062af182193aaf3)':
     dependencies:
+      '@aaub-software/dsh-sast-contract': 0.1.0
       '@deepseek-ai/cordis': 4.0.2
       '@deepseek-ai/dsh-sandbox': 0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-llm@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))(@deepseek-ai/dsh-session@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-scope@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-invariants@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))))
       '@deepseek-ai/dsh-sandbox-policy': 0.1.5-rc.2(1115db59ce43089d5b2885d86f4eeea2)
@@ -619,8 +664,11 @@ snapshots:
       - jiti
       - supports-color
 
-  '@aaub-software/dsh-semgrep-sast@0.1.2(20ee93e7f12d53496062af182193aaf3)':
+  '@aaub-software/dsh-sast-contract@0.1.0': {}
+
+  '@aaub-software/dsh-semgrep-sast@0.2.1(20ee93e7f12d53496062af182193aaf3)':
     dependencies:
+      '@aaub-software/dsh-sast-contract': 0.1.0
       '@deepseek-ai/cordis': 4.0.2
       '@deepseek-ai/dsh-sandbox': 0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-llm@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))(@deepseek-ai/dsh-session@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-scope@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-invariants@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))))
       '@deepseek-ai/dsh-sandbox-policy': 0.1.5-rc.2(1115db59ce43089d5b2885d86f4eeea2)
@@ -731,6 +779,18 @@ snapshots:
       '@deepseek-ai/dsh-llm': 0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)
       '@deepseek-ai/dsh-scope': 0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-invariants@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))
       '@deepseek-ai/dsh-util-values': 0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)
+
+  '@deepseek-ai/dsh-storage-domain@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-invariants@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))(@deepseek-ai/dsh-storage@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))':
+    dependencies:
+      '@deepseek-ai/cordis': 4.0.2
+      '@deepseek-ai/dsh-invariants': 0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)
+      '@deepseek-ai/dsh-storage': 0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)
+      '@deepseek-ai/schemastery': 3.18.2
+      zod: 4.6.2
+
+  '@deepseek-ai/dsh-storage@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)':
+    dependencies:
+      '@deepseek-ai/cordis': 4.0.2
 
   '@deepseek-ai/dsh-subprocess@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2)(@deepseek-ai/dsh-http-proxy@0.1.5-rc.2(@deepseek-ai/cordis@4.0.2))':
     dependencies:
@@ -854,6 +914,10 @@ snapshots:
   '@types/estree@1.0.9': {}
 
   '@types/json-schema@7.0.15': {}
+
+  '@types/node@24.13.5':
+    dependencies:
+      undici-types: 7.18.2
 
   '@typescript-eslint/parser@8.69.0(eslint@10.10.0)(typescript@6.0.3)':
     dependencies:
@@ -1153,6 +1217,8 @@ snapshots:
   typescript@5.9.3: {}
 
   typescript@6.0.3: {}
+
+  undici-types@7.18.2: {}
 
   undici@8.10.2: {}
 

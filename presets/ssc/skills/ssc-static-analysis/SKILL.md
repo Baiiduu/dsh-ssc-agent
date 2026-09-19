@@ -1,41 +1,45 @@
 ---
 name: ssc-static-analysis
-description: Use for static application security analysis of a repository, either by reviewing rule-engine findings with code context to reduce false positives or by directly analyzing code to find vulnerabilities that rules may miss.
+description: 用于对代码仓库开展静态应用安全分析，包括结合代码上下文审阅规则引擎告警以降低误报，以及直接分析代码以发现规则可能遗漏的漏洞。
 ---
 
-# Static Application Security Analysis
+# 静态应用安全分析
 
-Use either or both analysis paths according to the user's request and the evidence needed. They are complementary: rule-engine coverage finds known patterns efficiently, while direct model analysis can reason about project-specific behavior and cross-file logic.
+如果用户明确指定了扫描器，应遵循用户的选择；否则，根据仓库情况和用户要求的范围，自主决定使用规则引擎、直接代码分析或两者结合，并选择适合的可用扫描器。规则引擎适合高效发现已知模式，模型直接分析则适合推理项目特有行为和跨文件逻辑。
 
-## Review rule-engine findings
+## 审阅规则引擎告警
 
-When a rule-engine scan is appropriate, choose the available scanner according to the target and the question:
+适合使用规则引擎时，先查看必要的仓库结构、文件类型和相关依赖清单，再自行选择扫描器，不要把常规工具选择交给用户：
 
-- Use `semgrep_scan` for general, multi-language pattern coverage and Semgrep rules applicable to the repository.
-- Use `eslint_security_scan` for fast JavaScript or TypeScript security-hotspot checks based on that ecosystem's syntax and AST.
-- For a broader JavaScript or TypeScript assessment, use both when their complementary coverage is useful. Do not run both automatically when a narrow request or one relevant file only needs one scanner.
+- `semgrep_scan` 适合通用、多语言的模式扫描，以及仓库适用的 Semgrep 规则。
+- `eslint_security_scan` 适合快速检查 JavaScript 或 TypeScript 生态中的语法及 AST 安全热点。
+- 对 JavaScript 或 TypeScript 进行较全面的评估时，可以在两者确实能够形成互补覆盖时同时使用；如果请求范围很窄或只涉及一个相关文件，不要机械地同时运行二者。
 
-Scan the relevant workspace paths rather than widening the target without a reason. Treat every reported finding as a candidate, not as a confirmed vulnerability. A clean result from either scanner is not proof that the code is secure.
+当多个扫描器都适用时，只选择能够实质提升覆盖面的最小组合。在汇报分析结果时，简要说明选择理由，以及现有扫描器无法检查的重要语言或范围。
 
-For each material finding, inspect the reported code and enough surrounding context to determine:
+扫描与任务相关的工作区路径，不要无理由扩大范围。把每条告警视为候选问题，而不是已经确认的漏洞。任何一个扫描器未发现问题，都不能证明代码安全。
 
-- whether untrusted or attacker-controlled input can reach the reported operation;
-- whether the path is reachable in the real application;
-- whether validation, sanitization, authorization, encoding, or other controls prevent exploitation;
-- whether the operation has a concrete security impact in its actual deployment context.
+对于每条需要审阅的告警，检查报告位置处的代码以及足够的相关上下文，判断：
 
-Classify the finding as confirmed, likely, false positive, or requiring more evidence, and explain the classification from repository evidence. Do not infer exploitability from the rule severity alone. If the scan is partial or its findings are truncated, state that limitation instead of treating the result as complete.
+- 不可信或攻击者可控的输入能否到达被报告的操作；
+- 这条执行路径在真实应用中是否可达；
+- 校验、净化、授权、编码或其他控制是否阻止漏洞利用；
+- 该操作在实际部署环境中是否具有具体安全影响。
 
-## Analyze code directly
+将每条已审阅告警判定为 `confirmed`、`likely`、`false-positive` 或 `inconclusive`。不要仅根据规则严重级别判断可利用性。只有具体的仓库代码证据否定了漏洞成立的必要条件时，才能使用 `false-positive`；缺少重要上下文时使用 `inconclusive`。如果扫描只完成了一部分或结果被截断，应明确说明限制，不能把结果视为完整扫描。
 
-Use direct model analysis when the user requests a semantic review, when no suitable rule covers the suspected weakness, or when project context suggests that rule scanning alone is insufficient.
+对扫描器生成的 Finding 得出结论后，调用一次 `submit_sast_assessment`，传入准确的 Finding ID、裁决结果以及概括决定性代码依据的简短说明。必须先检查相关代码再提交。结构化提交用于保存结论，不能替代呈现给用户的解释。再次提交同一个 Finding 会更新已保存的结论。模型直接分析发现的问题没有扫描器生成的 Finding ID，不要为这类问题调用该工具。
 
-Understand the relevant entry points, trust boundaries, privileges, data flows, and security controls. Trace suspicious values and decisions across files where necessary. Look for vulnerabilities arising from business logic, unsafe combinations of otherwise ordinary operations, missing authorization or validation, and other project-specific behavior that pattern rules may not express.
+## 直接分析代码
 
-Base every reported issue on identifiable code and a plausible execution or data-flow path. Clearly separate observed facts from inference and state what additional evidence is needed when the path cannot be established. Do not describe the absence of discovered issues as proof that the project is secure.
+当用户要求语义审阅、没有合适规则覆盖可疑缺陷，或者项目上下文表明仅依赖规则扫描不足时，使用模型直接分析。
 
-## Combine the results
+理解相关入口、信任边界、权限、数据流和安全控制；必要时跨文件追踪可疑值和关键决策。重点发现业务逻辑缺陷、多个普通操作的不安全组合、缺失的授权或校验，以及模式规则难以表达的其他项目特有问题。
 
-When using both paths, use the engine results to guide contextual verification, then perform targeted direct analysis of important surfaces and gaps not covered by those findings. If Semgrep and ESLint Security report the same underlying operation, combine them into one issue rather than counting rule matches separately. Preserve the useful rule identifiers and report the strongest repository evidence for each conclusion.
+每个报告的问题都必须以可定位的代码和合理的执行路径或数据流为依据。明确区分观察到的事实和推断；无法建立完整路径时，说明还缺少什么证据。未发现问题不代表项目安全。
 
-Static analysis is read-only unless the user separately asks for remediation. Do not modify project code merely because an issue was found.
+## 合并分析结果
+
+同时采用两条路径时，先用规则引擎结果引导上下文验证，再针对重要攻击面和规则覆盖缺口开展直接分析。如果 Semgrep 与 ESLint Security 报告的是同一个底层操作，应合并为一个问题，而不是把规则匹配次数当作多个漏洞。保留有用的规则标识，并为每个结论给出最有力的仓库证据。
+
+除非用户另外要求修复，否则静态分析只进行只读检查。不要仅因为发现问题就修改项目代码。
