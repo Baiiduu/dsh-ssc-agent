@@ -79,6 +79,16 @@
 - id: ssc-agent-runtime
   name: '@aaub-software/dsh-ssc-agent/runtime'
 
+# ── security knowledge retrieval ───────────────────────────────────────────
+
+# The process Host mounts this package's `/host` half through the SSC bundle
+# patch, which owns Embedding settings and the browser connection-test Remote.
+# This root entry is the Agent half only: it consumes that parent service and
+# registers `security_knowledge_search` into this preset's scoped tool layer,
+# so ordinary Agent modes do not receive the RAG tool.
+- id: security-knowledge-rag
+  name: '@aaub-software/dsh-security-knowledge-rag/runtime'
+
 # ── background jobs ────────────────────────────────────────────────────────
 
 # Only the model-facing controls. The task REGISTRY stays on the host plane:

@@ -42,6 +42,7 @@
   "dependencies": {
     "@aaub-software/dsh-sast-contract": "workspace:0.1.0",
     "@aaub-software/dsh-eslint-security-sast": "0.2.0",
+    "@aaub-software/dsh-security-knowledge-rag": "workspace:0.1.0",
     "@aaub-software/dsh-semgrep-sast": "0.2.1",
     "zod": "^4.4.3"
   },

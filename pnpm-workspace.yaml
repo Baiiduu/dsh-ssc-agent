@@ -1,5 +1,6 @@
 packages:
   - 'packages/*'
+  - '../dsh-security-knowledge-rag'
 
 minimumReleaseAgeExclude:
   - '@aaub-software/dsh-eslint-security-sast@0.1.0'
