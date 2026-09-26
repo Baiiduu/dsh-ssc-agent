@@ -7,10 +7,3 @@
     roots:
       - path: !!js "process.getBuiltinModule('node:path').join(process.getBuiltinModule('node:path').dirname(process.getBuiltinModule('node:module').createRequire(baseUrl).resolve('@aaub-software/dsh-ssc-agent/package.json')), 'presets')"
         trust: system
-
-# Process-level half of the bundled security-knowledge RAG plugin. It owns the
-# durable Embedding settings and Web connection-test Remote, but registers no
-# model tool; the SSC preset mounts that Agent-facing half separately.
-- insert:
-    - id: security-knowledge-rag-host
-      name: '@aaub-software/dsh-security-knowledge-rag'

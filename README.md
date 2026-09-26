@@ -1,6 +1,20 @@
 # DeepSeek Harness SSC Agent
 
+> 当前开发版暂不集成 RAG：不挂载知识检索工具或 Embedding 设置服务。原 RAG 项目、语料和已有索引保留，后续按实际收益评估是否重新接入。
+
+> 本地开发状态（未发布）：已接入 `@aaub-software/dsh-sbom-sca`，在 SSC preset 注册 `dependency_targets`、`dependency_audit`、`installed_npm_audit`，并加入中文 `ssc-dependency-analysis` Skill。分别提供依赖来源发现、锁文件/声明 SBOM、物理 npm 安装元数据 SBOM 与可选 OSV 查询。安装元数据不等于完整产物验证；尚待真实 DSH 会话验收。以下发布版说明不代表这些新功能已上架。
+
 [English](#english) | [简体中文](#简体中文)
+
+### 本地新增：构建与发布审阅（未发布）
+
+`ssc-build-release-review` 是随 SSC preset 分发的中文 Skill，使用已有文件搜索与读取工具审阅 CI/CD、发布脚本、权限凭据及产物传递，不新增扫描器。它位于 preset 已注册的 `skills/` 目录，随 npm Bundle 打包；模型可按任务加载，不会每次扫描都强制加载。
+
+示例：`只读审阅当前仓库的构建与发布安全，说明源码到发布产物的链路、主要风险和无法验证的条件，不运行项目脚本。`
+
+当前已加入源码，并通过本地 tarball 更新开发机的 web profile；真实 DSH 会话验收仍待完成。仅修改开发目录不会更新已安装的 npm 副本。Skill 是审阅指引，不是权限隔离机制，也不证明模型必然覆盖全部风险。本轮不启用 RAG、不部署定时任务，效果对比留到阶段收尾。
+
+SSC persona 已统一说明源码安全、依赖与组件安全、构建与发布安全三个领域的职责：综合审计按项目适用性选择 Skill 和工具，专项任务保持范围；报告区分事实、推断、未知条件及实际覆盖，不把工具告警等同于可利用漏洞。该定位不更改部署的默认 Agent 模式。
 
 ## English
 
