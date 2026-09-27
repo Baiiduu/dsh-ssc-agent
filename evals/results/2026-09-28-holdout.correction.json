@@ -1,0 +1,13 @@
+{
+  "caseId": "77d44602-5e66-4be6-87e2-98168817c97b",
+  "family": "cache-principal",
+  "action": "exclude all three variants from headline correctness and false-positive denominator; keep raw results and qualitative findings",
+  "reason": "TASK does not restrict trusted actor.id to strings or scalar identifiers. The original oracle only exercised string principals. The revised model found distinct object principals with identical JSON representations collide despite different strict-equality owners. This is a real mechanism with unknown production authentication shape, not a model false positive.",
+  "reviewerReproduction": {
+    "distinctIdentities": true,
+    "first": "A",
+    "second": "A",
+    "crossReference": true
+  },
+  "unchanged": "Original materials, answer-key and model snapshots were not changed. This is an adjudication correction, not a rerun or tuning change."
+}

@@ -1,0 +1,20 @@
+{
+  "action": "save",
+  "caseId": "candidate-access",
+  "record": {
+    "title": "候选访问边界问题",
+    "revision": "填写实际版本或哈希；未知时明确说明",
+    "hypothesis": "填写具体调用者经某入口违反某约束的假设",
+    "boundary": "填写应被维持的安全约束",
+    "status": "investigating",
+    "claims": [
+      { "kind": "attacker-control", "conclusion": "unknown", "rationale": "尚未核实", "evidenceIds": [] },
+      { "kind": "reachability", "conclusion": "unknown", "rationale": "尚未核实", "evidenceIds": [] },
+      { "kind": "ineffective-guard", "conclusion": "unknown", "rationale": "尚未核实", "evidenceIds": [] },
+      { "kind": "security-impact", "conclusion": "unknown", "rationale": "尚未核实", "evidenceIds": [] }
+    ],
+    "evidence": [],
+    "counteranalysis": { "alternative": "入口或后端可能已有防护", "conclusion": "unknown", "rationale": "尚未检查对应实现", "evidenceIds": [] },
+    "nextCheck": "填写下一项能改变判断的具体检查"
+  }
+}

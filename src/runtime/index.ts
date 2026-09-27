@@ -9,6 +9,8 @@ import type {} from '@deepseek-ai/dsh-tools'
 import { SastAssessmentStore } from './storage.js'
 import { sscSastStorageSpec } from './storage-spec.js'
 import { createSubmitSastAssessmentTool } from './tool.js'
+import { InvestigationStore, investigationStorageSpec } from './investigation.js'
+import { createSecurityInvestigationTool } from './investigation-tool.js'
 
 const SAST_SCAN_TOOLS = new Set([
   'semgrep_scan',
@@ -27,6 +29,10 @@ export async function apply(ctx: Context): Promise<void> {
   const store = new SastAssessmentStore(domain)
   ctx.effect(() => () => store.close(), 'sscAgentRuntime.storageClose')
   ctx.tools.register(createSubmitSastAssessmentTool(store))
+
+  const investigations = new InvestigationStore(await ctx.storageDomain.open(investigationStorageSpec))
+  ctx.effect(() => () => investigations.close(), 'sscAgentRuntime.investigationsClose')
+  ctx.tools.register(createSecurityInvestigationTool(investigations))
 
   ctx.on('tools/post-execute', async (exec, result, next) => {
     const decision = await next()
